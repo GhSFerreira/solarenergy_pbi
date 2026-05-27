@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SolarVerde — Energia Solar para o seu Negócio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sun:     #F5A623;
+    --leaf:    #2D6A4F;
+    --leaf2:   #40916C;
+    --sky:     #E8F4F0;
+    --dark:    #1A2E22;
+    --text:    #2C3E30;
+    --muted:   #6B7C6F;
+    --white:   #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--sky);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(232,244,240,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(45,106,79,0.12);
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; color: var(--leaf);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .logo-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--sun); }
+  nav ul { list-style: none; display: flex; gap: 32px; }
+  nav ul a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500;
+    transition: color .2s; }
+  nav ul a:hover { color: var(--leaf); }
+  .nav-cta {
+    background: var(--leaf); color: var(--white);
+    border: none; padding: 10px 22px; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--leaf2); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 48px 80px;
+    position: relative; overflow: hidden;
+  }
+  .sun-bg {
+    position: absolute; right: -80px; top: 50%;
+    transform: translateY(-50%);
+    width: 560px; height: 560px; border-radius: 50%;
+    background: radial-gradient(circle, #F5A62340 0%, #F5A62310 50%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  .sun-ring {
+    position: absolute; right: 40px; top: 50%;
+    transform: translateY(-50%);
+    width: 380px; height: 380px; border-radius: 50%;
+    border: 1.5px solid rgba(245,166,35,0.25);
+    animation: spin 40s linear infinite;
+  }
+  .sun-ring::before {
+    content: ''; position: absolute;
+    top: -5px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--sun);
+  }
+  @keyframes pulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+  @keyframes spin  { to { transform: translateY(-50%) rotate(360deg); } }
+
+  .hero-content { max-width: 580px; position: relative; z-index: 2; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(45,106,79,0.1); color: var(--leaf);
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 12px; font-weight: 500; letter-spacing: .5px;
+    text-transform: uppercase; margin-bottom: 28px;
+  }
+  .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--leaf2); }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.1; color: var(--dark);
+    margin-bottom: 24px;
+  }
+  h1 em { font-style: italic; color: var(--leaf2); }
+
+  .hero-sub {
+    font-size: 17px; color: var(--muted); font-weight: 300;
+    max-width: 440px; margin-bottom: 44px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--leaf); color: var(--white);
+    border: none; padding: 14px 32px; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+    cursor: pointer; transition: all .2s;
+    box-shadow: 0 4px 20px rgba(45,106,79,0.3);
+  }
+  .btn-primary:hover { background: var(--dark); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--leaf);
+    border: 1.5px solid var(--leaf); padding: 14px 32px; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+    cursor: pointer; transition: all .2s;
+  }
+  .btn-ghost:hover { background: var(--leaf); color: var(--white); }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 56px;
+    padding-top: 40px; border-top: 1px solid rgba(45,106,79,0.15);
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px; color: var(--dark);
+  }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* ── CARDS ── */
+  .section {
+    padding: 96px 48px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--leaf2);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3vw, 42px);
+    color: var(--dark); margin-bottom: 48px;
+    max-width: 480px;
+  }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .card {
+    background: var(--white);
+    border-radius: 20px; padding: 32px;
+    border: 1px solid rgba(45,106,79,0.1);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,46,34,0.1); }
+  .card-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: rgba(245,166,35,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 20px;
+  }
+  .card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px; color: var(--dark); margin-bottom: 10px;
+  }
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ── BANNER VERDE ── */
+  .banner {
+    background: var(--dark); color: var(--white);
+    padding: 80px 48px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .banner::before {
+    content: ''; position: absolute;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: rgba(245,166,35,0.08);
+    top: -100px; right: -100px;
+  }
+  .banner h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 3vw, 40px);
+    margin-bottom: 16px;
+  }
+  .banner p { color: rgba(255,255,255,0.65); margin-bottom: 32px; font-size: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 48px;
+    border-top: 1px solid rgba(45,106,79,0.12);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: var(--muted);
+  }
+
+  /* ══════════════════════════════════════
+     MODAL DE CALLBACK — invisível para visitantes
+     Só aparece quando há ?code= na URL
+  ══════════════════════════════════════ */
+  #oauth-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(26,46,34,0.7);
+    backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+  }
+  #oauth-overlay.visible { display: flex; }
+
+  #oauth-box {
+    background: var(--white);
+    border-radius: 20px; padding: 40px;
+    max-width: 540px; width: 90%;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+    animation: slideUp .35s ease;
+  }
+  @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  #oauth-box h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px; color: var(--dark);
+    margin-bottom: 8px;
+  }
+  #oauth-box p { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+
+  .code-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--leaf2); margin-bottom: 8px;
+  }
+  .code-box {
+    background: var(--sky);
+    border: 1.5px solid rgba(45,106,79,0.2);
+    border-radius: 12px; padding: 14px 16px;
+    font-family: 'Courier New', monospace; font-size: 13px;
+    color: var(--dark); word-break: break-all;
+    margin-bottom: 16px; line-height: 1.5;
+  }
+
+  .copy-btn {
+    width: 100%;
+    background: var(--leaf); color: var(--white);
+    border: none; padding: 14px; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+    cursor: pointer; transition: background .2s;
+  }
+  .copy-btn:hover { background: var(--dark); }
+  .copy-btn.copied { background: #40916C; }
+
+  .oauth-step {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-top: 20px; padding-top: 20px;
+    border-top: 1px solid rgba(45,106,79,0.12);
+    font-size: 13px; color: var(--muted); line-height: 1.6;
+  }
+  .step-num {
+    background: var(--leaf); color: var(--white);
+    width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    nav ul { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .section { padding: 60px 20px; }
+    .hero-stats { gap: 24px; }
+    .sun-bg, .sun-ring { display: none; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    SolarVerde
+  </div>
+  <ul>
+    <li><a href="#beneficios">Benefícios</a></li>
+    <li><a href="#como-funciona">Como funciona</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <button class="nav-cta">Solicitar orçamento</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="sun-bg"></div>
+  <div class="sun-ring"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      Energia limpa e sustentável
+    </div>
+    <h1>Reduza sua conta de luz com energia <em>solar</em></h1>
+    <p class="hero-sub">
+      Soluções de geração distribuída para empresas e residências.
+      Economia real desde o primeiro mês de operação.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary">Ver planos</button>
+      <button class="btn-ghost">Como funciona</button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">95%</div>
+        <div class="stat-label">Redução na conta</div>
+      </div>
+      <div>
+        <div class="stat-num">3–5</div>
+        <div class="stat-label">Anos p/ retorno</div>
+      </div>
+      <div>
+        <div class="stat-num">25+</div>
+        <div class="stat-label">Anos de vida útil</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFÍCIOS -->
+<div class="section" id="beneficios">
+  <div class="section-label">Por que energia solar</div>
+  <div class="section-title">Vantagens que fazem diferença no seu caixa</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">☀️</div>
+      <h3>Economia imediata</h3>
+      <p>Reduza até 95% da sua conta de energia elétrica a partir da ativação do sistema.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌱</div>
+      <h3>Sustentabilidade</h3>
+      <p>Energia limpa, sem emissões. Contribua para um planeta mais saudável e valorize sua marca.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📈</div>
+      <h3>Valorização do imóvel</h3>
+      <p>Propriedades com geração solar valem em média 10% a mais no mercado imobiliário.</p>
+    </div>
+  </div>
+</div>
+
+<!-- COMO FUNCIONA -->
+<section style="background: var(--white); padding: 96px 0;" id="como-funciona">
+  <div class="section" style="padding-top: 0; padding-bottom: 0;">
+    <div class="section-label">Processo simples</div>
+    <div class="section-title">Da visita técnica à geração de energia</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon" style="background: rgba(45,106,79,0.1); font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--leaf);">1</div>
+        <h3>Visita técnica</h3>
+        <p>Avaliamos seu consumo e a estrutura do imóvel para dimensionar o sistema ideal.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background: rgba(45,106,79,0.1); font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--leaf);">2</div>
+        <h3>Projeto e aprovação</h3>
+        <p>Desenvolvemos o projeto elétrico e cuidamos de toda a burocracia junto à distribuidora.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background: rgba(45,106,79,0.1); font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--leaf);">3</div>
+        <h3>Instalação e ativação</h3>
+        <p>Instalamos em 1 a 3 dias. Após homologação da concessionária, você começa a gerar energia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<div class="banner" id="contato">
+  <h2>Pronto para gerar sua própria energia?</h2>
+  <p>Solicite um orçamento sem compromisso. Nossa equipe retorna em até 24 horas.</p>
+  <button class="btn-primary" style="background: var(--sun); color: var(--dark);">Quero meu orçamento</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    SolarVerde
+  </div>
+  <span>© 2025 SolarVerde Energia. Todos os direitos reservados.</span>
+</footer>
+
+
+<!-- ══════════════════════════════════
+     MODAL DE CALLBACK OAUTH2
+     Invisível para visitantes normais.
+     Aparece apenas quando a URL contém ?code=
+════════════════════════════════════ -->
+<div id="oauth-overlay">
+  <div id="oauth-box">
+    <h2>✅ Autorização recebida</h2>
+    <p>Código de autorização capturado com sucesso. Copie e cole no terminal para gerar o token.</p>
+
+    <div class="code-label">Código de autorização</div>
+    <div class="code-box" id="code-display">—</div>
+
+    <button class="copy-btn" id="copy-btn" onclick="copiarCodigo()">
+      Copiar código
+    </button>
+
+    <div class="oauth-step">
+      <div class="step-num">1</div>
+      <div>Copie o código acima e volte ao terminal onde o script Python está aguardando.</div>
+    </div>
+    <div class="oauth-step" style="border-top: none; padding-top: 8px;">
+      <div class="step-num">2</div>
+      <div>Cole quando solicitado. O script trocará o código pelo <code>token.json</code> automaticamente.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Verifica se a URL contém ?code= ao carregar a página
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const code   = params.get('code');
+    const error  = params.get('error');
+
+    if (code) {
+      document.getElementById('code-display').textContent = code;
+      document.getElementById('oauth-overlay').classList.add('visible');
+      // Limpa o code da URL sem recarregar (discreção)
+      window.history.replaceState({}, '', window.location.pathname);
+    } else if (error) {
+      document.getElementById('code-display').textContent =
+        'Erro: ' + error + ' — ' + (params.get('error_description') || 'Acesso negado.');
+      document.getElementById('oauth-overlay').classList.add('visible');
+    }
+  })();
+
+  function copiarCodigo() {
+    const texto = document.getElementById('code-display').textContent;
+    navigator.clipboard.writeText(texto).then(() => {
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = '✓ Copiado!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copiar código';
+        btn.classList.remove('copied');
+      }, 2500);
+    });
+  }
+
+  // Fecha o modal clicando fora
+  document.getElementById('oauth-overlay').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('visible');
+  });
+</script>
+
+</body>
+</html>
